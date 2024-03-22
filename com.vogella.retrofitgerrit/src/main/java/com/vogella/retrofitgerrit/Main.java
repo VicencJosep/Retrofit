@@ -7,12 +7,9 @@ import retrofit2.http.GET;
 public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();
-        controller.start();
+        controller.start("AliciaCarmonaLopez");
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.example.com")
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
+
 
         // @GET("users")
         // Observable<List<User>> getUsers();

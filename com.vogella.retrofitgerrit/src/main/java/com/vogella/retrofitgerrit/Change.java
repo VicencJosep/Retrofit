@@ -1,14 +1,13 @@
 package com.vogella.retrofitgerrit;
 
 public class Change {
-    String subject;
+    private String id;
 
-    public String getSubject() {
-        return subject;
+    public String getId() {
+        return id;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setId(String id) {
+        this.id = id;
     }
-
 }

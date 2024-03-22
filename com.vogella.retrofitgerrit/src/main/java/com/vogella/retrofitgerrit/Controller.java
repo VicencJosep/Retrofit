@@ -13,9 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Controller implements Callback<List<Change>> {
 
-    static final String BASE_URL = "https://git.eclipse.org/r/";
+    static final String BASE_URL = "https://api.github.com/users/";
 
-    public void start() {
+    public void start(String user) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -25,9 +25,9 @@ public class Controller implements Callback<List<Change>> {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        GerritAPI gerritAPI = retrofit.create(GerritAPI.class);
+        GitHubApi githubAPI = retrofit.create(GitHubApi.class);
 
-        Call<List<Change>> call = gerritAPI.loadChanges("status:open");
+        Call<List<Change>> call = githubAPI.loadChanges(user,"status:open");
         call.enqueue(this);
 
     }
@@ -36,7 +36,7 @@ public class Controller implements Callback<List<Change>> {
     public void onResponse(Call<List<Change>> call, Response<List<Change>> response) {
         if(response.isSuccessful()) {
             List<Change> changesList = response.body();
-            changesList.forEach(change -> System.out.println(change.subject));
+            changesList.forEach(change -> System.out.println("La id es "+change.getId()));
         } else {
             System.out.println(response.errorBody());
         }
